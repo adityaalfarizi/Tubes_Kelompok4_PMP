@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "dokter.h" // Pastikan file header ini ada dan sesuai
+#include "dokter.h"
 
-// Ganti seluruh fungsi generate_jadwal Anda dengan ini
+
 void generate_jadwal(const char *filename) {
-    // Buka file CSV dan baca data dokter
+    
     FILE *file = fopen(filename, "r");
     if (!file) {
         perror("Gagal membuka file CSV");
