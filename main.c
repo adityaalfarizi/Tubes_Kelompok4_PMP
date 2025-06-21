@@ -30,6 +30,11 @@ void tampilkan_menu_jadwal() {
     printf("Pilihan: ");
 }
 
+void bersihkan_buffer() {
+    //buat bersihin input aja inimah
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
 
 int main() {
     int pilihan_utama;
@@ -37,15 +42,43 @@ int main() {
     char filename_jadwal[100];
 
     printf("Selamat datang di Sistem Penjadwalan Dokter!\n");
-    printf("Masukkan nama file data dokter (e.g., daftar_dokter.csv): ");
-    scanf("%99s", filename_dokter);
-    printf("Masukkan nama file output jadwal (e.g., jadwal.csv): ");
-    scanf("%99s", filename_jadwal);
+    while (1) {
+        printf("Masukkan nama file data dokter (e.g., daftar_dokter.csv): ");
+        scanf("%99s", filename_dokter);
+        FILE *test1 = fopen(filename_dokter, "r");
+        if (!test1) {
+            fclose(test1);
+            perror("Gagal membuka file, coba lagi!");
+        }
+        else {
+            fclose(test1);
+            break;
+        }
+        jeda(2);
+    }
+    while (1) {
+        printf("Masukkan nama file output jadwal (e.g., jadwal.csv): ");
+        scanf("%99s", filename_jadwal);
+        FILE *test2 = fopen(filename_jadwal, "r");
+        if (!test2) {
+            fclose(test2);
+            perror("Gagal membuka file, coba lagi!");
+        }
+        else {
+            fclose(test2);
+            break;
+        }
+        jeda(2);
+    }
 
     // Loop untuk menu utama
     do {
         tampilkan_menu_utama();
-        scanf("%d", &pilihan_utama);
+        //Periksa apakah input adalah angka yang valid
+        if (scanf("%d", &pilihan_utama) != 1) {
+            pilihan_utama = -1; // Set ke nilai invalid agar masuk ke default
+        }
+        bersihkan_buffer();
 
         switch (pilihan_utama) {
             case 1: { // Tambah Dokter
@@ -55,15 +88,18 @@ int main() {
 
                 printf("  -> Nama Dokter: ");
                 scanf(" %99[^\n]", nama);
+                bersihkan_buffer();
                 
 
                 printf("  -> Maksimal shift per minggu: ");
                 scanf("%d", &max_shift);
+                bersihkan_buffer();
                 
 
                 printf("  -> Preferensi shift (PAGI/SIANG/MALAM): ");
                 scanf(" %19[^\n]", pref_shift);
                 string_to_upper(pref_shift);
+                bersihkan_buffer();
                 
 
                 tambah_data(filename_dokter, nama, max_shift, pref_shift);
@@ -74,6 +110,7 @@ int main() {
                 char nama_dokter[MAX_NAMA];
                 printf("  -> Nama Dokter yang akan dihapus: ");
                 scanf(" %99[^\n]", nama_dokter);
+                bersihkan_buffer();
                 
                 hapus_data(filename_dokter, nama_dokter);
                 jeda(1);
@@ -101,6 +138,7 @@ int main() {
                             int hari;
                             printf("  -> Hari ke (1-30): ");
                             scanf("%d", &hari);
+                            bersihkan_buffer();
                             
                             tampilkan_jadwal_harian(hari);
                             jeda(1);
@@ -110,6 +148,7 @@ int main() {
                             int minggu;
                             printf("  -> Minggu ke (1-4): ");
                             scanf("%d", &minggu);
+                            bersihkan_buffer();
                             
                             tampilkan_jadwal_mingguan(minggu);
                             jeda(1);
@@ -130,6 +169,7 @@ int main() {
                         case 6: { // Simpan Jadwal ke File
                             simpan_jadwal_ke_file(filename_jadwal);
                             printf("Jadwal telah disimpan ke file '%s'\n", filename_jadwal);
+                            bersihkan_buffer();
                             jeda(1);
                             break;
                         }
