@@ -50,8 +50,6 @@ void tambah_data(const char *filename, const char *nama, int max_shift, const ch
     printf("Data berhasil ditambahkan.\n");
 }
 
-// File: dokter.c
-
 void hapus_data(const char *filename, const char *nama_dokter) {
     FILE *file = fopen(filename, "r");
     if (!file) {

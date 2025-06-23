@@ -21,12 +21,16 @@ void simpan_jadwal_ke_file(const char* filename) {
         int shift = i % 3;
         
         fprintf(file, "%d,%s,", hari, shift_names[shift]);
-        if (jadwal_30hari[i].dokter != NULL) {
-            fprintf(file, "%s\n", jadwal_30hari[i].dokter->nama);
-        } else {
-            fprintf(file, "NULL\n");
+    if (jadwal_30hari[i].jumlah_dokter == 0) {
+        fprintf(file, "NULL\n");
+    } else {
+        for (int j = 0; j < jadwal_30hari[i].jumlah_dokter; j++) {
+            if (j > 0) fprintf(file, ";");
+            fprintf(file, "%s", jadwal_30hari[i].dokter[j]->nama);
         }
+        fprintf(file, "\n");
     }
     
     fclose(file);
+    }
 }
