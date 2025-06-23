@@ -3,7 +3,7 @@ DAFTAR NAMA DAN NIM ANGGOTA KELOMPOK:
 Kennard Hezekiah Montoya			13223113
 Dede Firman					13223114
 Rafif Reinhart Al Aflah			        13223105
-Davin Gunawan			              13223092
+Davin Gunawan			               13223092
 Aditya Al Farizi				13223101
 
 1. bersihkan projek lama
