@@ -131,6 +131,7 @@ int main() {
                 do {
                     tampilkan_menu_jadwal();
                     scanf("%d", &pilihan_jadwal);
+                    bersihkan_buffer();
                     
 
                     switch (pilihan_jadwal) {
