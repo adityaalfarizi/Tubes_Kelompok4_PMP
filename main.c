@@ -130,10 +130,11 @@ int main() {
                 // Loop untuk sub-menu jadwal
                 do {
                     tampilkan_menu_jadwal();
-                    scanf("%d", &pilihan_jadwal);
+                    if (scanf("%d", &pilihan_jadwal) != 1) {
+                        pilihan_jadwal = -1; // Set ke nilai invalid agar masuk ke default
+                    }
                     bersihkan_buffer();
                     
-
                     switch (pilihan_jadwal) {
                         case 1: { // Tampilkan Jadwal Harian
                             int hari;
@@ -170,7 +171,6 @@ int main() {
                         case 6: { // Simpan Jadwal ke File
                             simpan_jadwal_ke_file(filename_jadwal);
                             printf("Jadwal telah disimpan ke file '%s'\n", filename_jadwal);
-                            bersihkan_buffer();
                             jeda(1);
                             break;
                         }
